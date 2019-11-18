@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let reactUser = new Schema({
-    email: {
+let User = new Schema({
+    name: {
         type: String
     },
-    password: {
+    age: {
         type: String
-    } 
+    },
+    sex:{
+        type:String
+    },
+    major:{
+        type:String
+    }
 });
-module.exports = mongoose.model('reactUser', reactUser);
+module.exports = mongoose.model('User', User);

@@ -8,7 +8,7 @@ const PORT = 3000;
 let User = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
-mongoose.connect('mongodb://127.0.0.1:27017/reactUser', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/user', { useNewUrlParser: true });
 
 const connection = mongoose.connection;
 
@@ -17,18 +17,52 @@ connection.once('open', function() {
 })
 
 
-todoRoutes.route('/login').post(function(req, res) {
-    User.findOne({email: req.body.email, password: req.body.password}, function(err, user) {
+todoRoutes.route('/').get(function(req, res) {   
+  //   console.log('request:  ', req);
+    User.find( function(err, aa) {
         if (err) {
-            console.log("err->", err);
-       } else {
-           res.json(user);
-          
-       }
+             console.log("err->", err);
+        } else {
+            res.json(aa);
+           
+        }
+    });
+});
+
+todoRoutes.route('/:id').get(function(req, res) {
+    let id = req.params.id;
+    User.findById(id, function(err, user) {
+        res.json(user);
+    });
+});
+
+todoRoutes.route('/:id').delete(
+    function(req, res) {
+        let id = req.params.id;
+        console.log(id);
+        User.deleteOne({_id: id}, function(err, user) {
+            res.json(user);
+        })}
+);
+todoRoutes.route('/update/:id').post(function(req, res) {
+    User.findById(req.params.id, function(err, user) {
+        if (!user)
+            res.status(404).send("data is not found");
+        else
+            user.email = req.body.email;
+            user.password = req.body.password;
+            
+            user.save().then(todo => {
+                res.json('Todo updated!');
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
     });
 });
 
 todoRoutes.route('/add').post(function(req, res) {
+
     let user = new User(req.body);
     user.save()
         .then(todo => {
@@ -39,63 +73,6 @@ todoRoutes.route('/add').post(function(req, res) {
         });
 });
 
-todoRoutes.route('/show').post(function(req, res) {
-    User.find(function(err, user) {
-        if (err) {
-            console.log("err->", err);
-       } else {
-           res.json(user);
-          
-       }
-    });
-});
-
-
-
-todoRoutes.route('/').get(function(req, res) {   
-    //   console.log('request:  ', req);
-      User.find( function(err, aa) {
-          if (err) {
-               console.log("err->", err);
-          } else {
-              res.json(aa);
-             
-          }
-      });
-  });
-  
-  todoRoutes.route('/:id').get(function(req, res) {
-      let id = req.params.id;
-      User.findById(id, function(err, user) {
-          res.json(user);
-      });
-  });
-  
-  todoRoutes.route('/:id').delete(
-      function(req, res) {
-          let id = req.params.id;
-          console.log(id);
-          User.deleteOne({_id: id}, function(err, user) {
-              res.json(user);
-          })}
-  );
-  todoRoutes.route('/update/:id').post(function(req, res) {
-      User.findById(req.params.id, function(err, user) {
-          if (!user)
-              res.status(404).send("data is not found");
-          else
-              user.email = req.body.email;
-              user.password = req.body.password;
-              
-              user.save().then(todo => {
-                  res.json('Todo updated!');
-              })
-              .catch(err => {
-                  res.status(400).send("Update not possible");
-              });
-      });
-  });
-  
 
 app.use('/todos', todoRoutes);
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+    <div class="container-fluid" style="background: #2656bd;box-shadow: white,2px,2px,2px,3px;">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div *ngIf="users.length == 0">     There is no data                    </div>
+                <div  *ngIf="users.length != 0" >                 
+                                <div *ngFor="let user of users" class="user-item col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                                    <mat-card class="example-card">
+                                        <mat-card-header>
+                                          <div mat-card-avatar class="example-header-image"></div>
+                                          <mat-card-title style="height: 70px;">{{user.name}}</mat-card-title>
+                                          <mat-card-subtitle style="height: 20px;">{{user.age}}----{{user.sex}}</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <img mat-card-image src="../../../assets/img/myprofile.png" alt="Photo of a Shiba Inu" >
+                                        <mat-card-content style="height: 10px;">
+                                          <p>        {{user.major}}      </p>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                          <button mat-button (click)="deleteUseasdasdr(user._id)">delete</button>   
+                                        </mat-card-actions>
+                                    </mat-card> <br/><br/> 
+                            </div>
+                 
+                
+                </div>              
+            </div>           
+        </div> 
+    </div>
+  
+</body>
+</html>
+ 

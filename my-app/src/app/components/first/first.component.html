@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+    <div class="container-fluid" style="background: #2656bd;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-8 col-xs-10" style="background:#94a6d1;box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);" >
+                  <div class=" w3l-form-group" style="width: 100%;">
+                      <mat-form-field class="example-full-width" style="width: 100%;">
+                          <textarea matInput  placeholder="Name:"  [(ngModel)]="name" ></textarea>
+                        </mat-form-field>
+                  </div>
+                  <div class=" w3l-form-group" style="width: 100%;">
+                      <mat-form-field class="example-full-width" style="width: 100%;">
+                          <textarea matInput  placeholder="Age:"  [(ngModel)]="age" ></textarea>
+                        </mat-form-field>
+                  </div>
+                  <div class=" w3l-form-group" style="width: 100%;" >
+                      <mat-form-field style="width: 100%;">
+                          <mat-label>Major:</mat-label>
+                          <mat-select  [(ngModel)]="sex"> 
+                            <mat-option *ngFor = "let item of sex_list" value="{{item}}" >{{item}}</mat-option> 
+                          </mat-select>
+                        </mat-form-field>
+                  </div>
+                  <div class=" w3l-form-group" style="width: 100%;">
+                      <mat-form-field style="width: 100%;">
+                          <mat-label>Major:</mat-label>
+                          <mat-select  [(ngModel)]="major"> 
+                            <mat-option *ngFor = "let item of major_list" value="{{item}}" >{{item}}</mat-option> 
+                          </mat-select>
+                        </mat-form-field>
+                  </div>
+                  <button mat-fab color="primary"  (click)="saveDataToDB()"  class="col-lg-3">Add</button> 
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-2 col-xs-1"></div>
+            </div>
+             
+        </div>
+     
+    </div>
+        
+   
+</body>
+</html>
+ 
